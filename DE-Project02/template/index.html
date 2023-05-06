@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example</title>
+</head>
+<body>
+    <h1>Data</h1>
+    <ul>
+        {% for item in data %}
+            <li><strong>{{ item[0] }}</strong> - {{ item[3] }}</li>
+            <li><a href="{{ item[2] }}">{{ item[2] }}</a></li>
+            <li>{{ item[5] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
