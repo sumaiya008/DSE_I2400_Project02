@@ -17,7 +17,7 @@ It allows you to parse HTML and XML documents and extract the relevant informati
 
 Installing required packages
 ```sh
-$ pip install -r requirements.txt
+$ pip install -r requirement.txt
 ```
 
 
