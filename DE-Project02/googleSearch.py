@@ -25,6 +25,7 @@ DBobejct = DbOps(databaseName, tablename)
 DBobejct.connect()
 
 
+
 def Search(keyword, searchengine):
     # tabUrl = "http://google.com/search?q="
 
@@ -42,18 +43,27 @@ def Search(keyword, searchengine):
 
         # iterating over tags
         for i in tags:
-            # selecting url using href tags
-            url = (i.select_one('a[href]')).get('href', u'')
-            # selecting title using h2 tags
-            title = (i.select_one('h2')).text.strip()
-            # selecting text using p tags
-            text = (i.select_one('p')).text.strip()
-            # append this as a dict into the result
-            results.append({'query': keyword,
-                            'link': url,
-                            'title': title,
-                            'text': text})
+            try:
+                # selecting url using href tags
+                url = (i.select_one('a[href]')).get('href', u'')
+                # selecting title using h2 tags
+                title = (i.select_one('h2')).text.strip()
+                # selecting text using p tags
+                if len(((i.select_one('p')).text.strip()).split("·"))>1:
+                    text = ((i.select_one('p')).text.strip()).split("·")[1]
+                else:
+                    text = ((i.select_one('p')).text.strip())
 
+                # append this as a dict into the result
+                results.append({'query': keyword,
+                                'link': url,
+                                'title': title,
+                                'text': text})
+            except:
+                print("Error in fetching data")
+                continue
+
+            DBobejct.insertQuery(keyword, searchengine, url, title, text)
         # returing list of dictionaries
         return results
 
@@ -73,18 +83,34 @@ def Search(keyword, searchengine):
         results = []
 
         for i in tags:
-            # selecting url using href tags
-            link = (i.select_one('div.compTitle h3.title a')).get('href', u'')
-            # selecting title using h3_title tags
-            title = (i.select_one('div.compTitle h3.title')).text.strip()
-            # selecting text using comptext tags
-            text = (i.select_one('div.compText')).text.strip()
-            # append this as a dict into the result
-            results.append({'query': keyword,
-                            'link': link,
-                            'title': title,
-                            'text': text})
+            try:
+                # selecting url using href tags
+                link = (i.select_one('div.compTitle h3.title a')).get('href', u'')
 
+                # selecting title using h3_title tags
+                if len(((i.select_one('div.compTitle h3.title')).text.strip()).split(" › ")) > 1:
+                    title = ((i.select_one('div.compTitle h3.title')).text.strip()).split(" › ")[2]
+                    title = re.sub(r'([a-z])([A-Z])', r'\1 \2', title)
+                else:
+                    title = ((i.select_one('div.compTitle h3.title')).text.strip())
+                    title = re.sub(r'([a-z])([A-Z])', r'\1 \2', title)
+
+
+                # selecting text using comptext tags
+                if len(((i.select_one('div.compText')).text.strip()).split("·")) > 1:
+                    text = ((i.select_one('div.compText')).text.strip()).split("·")[1]
+                else:
+                    text = ((i.select_one('div.compText')).text.strip())
+                # append this as a dict into the result
+                results.append({'query': keyword,
+                                'link': link,
+                                'title': title,
+                                'text': text})
+            except:
+                print("Error in fetching data")
+                continue
+
+            DBobejct.insertQuery(keyword, searchengine, link, title, text)
         # returing list of dictionaries
         return results
 
@@ -114,6 +140,7 @@ def Search(keyword, searchengine):
 
 
     elif searchengine == 'DuckDuckGo':
+
         # completing the url using user defined query
         url = f'https://html.duckduckgo.com/html/'
         # creating a response object for storing all the information from the url
@@ -126,20 +153,27 @@ def Search(keyword, searchengine):
         # creating an empty list to store the results
         results = []
 
-        for i in tags:
-            # selecting url using href tags
-            link = (i.select_one('a.result__snippet')).get('href', u'')
-            # selecting title using h2 tags
-            title = (i.select_one('h2.result__title a')).text
-            # selecting text using result__snippet tags
-            text = (i.select_one('a.result__snippet')).text
-            # append this as a dict into the result
-            results.append({'query': keyword,
-                            'link': link,
-                            'title': title,
-                            'text': text})
 
-            DBobejct.insertQuery(searchengine, keyword, link ,title, text)
+        for i in tags:
+
+            try:
+                # selecting url using href tags
+                link = (i.select_one('a.result__snippet')).get('href', u'')
+                # selecting title using h2 tags
+                title = (i.select_one('h2.result__title a')).text
+                # selecting text using result__snippet tags
+                text = (i.select_one('a.result__snippet')).text
+                # append this as a dict into the result
+                results.append({'query': keyword,
+                                'link': link,
+                                'title': title,
+                                'text': text})
+            except:
+                print("Error in fetching data")
+                continue
+
+            DBobejct.insertQuery(keyword, searchengine, link ,title, text)
+            # Keyword, searchengine, URLs, Title, Data
 
         # returing list of dictionaries
         return results

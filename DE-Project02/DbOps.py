@@ -56,7 +56,9 @@ class DbOps:
 
     def insertQuery(self, Keyword, searchengine, URLs, Title, Data):
         sql = "INSERT INTO " + self.tableName + " ( Keyword, SearchEngine, URLs, Title, Data) VALUES (%s,%s,%s, %s, %s)"
-        val = (searchengine, Keyword, URLs, Title, Data)
+
+
+        val = (Keyword,searchengine, URLs, Title, Data)
         self.cursor.execute(sql, val)
         self.cnx.commit()
 
@@ -70,8 +72,7 @@ class DbOps:
     def searchKeyword(self, query):
 
         # sql = "INSERT INTO " + self.tableName + " ( Keyword, SearchEngine, URLs, Title, Data) VALUES (%s,%s,%s, %s, %s)"
-        sql = "SELECT * FROM " + self.tableName + " WHERE MATCH ( Keyword ) AGAINST ( '" +   query  + "') LIMIT 0, 2" \
-                                                                                                      "0;"
+        sql = "SELECT * FROM " + self.tableName + " WHERE MATCH ( Keyword ) AGAINST ( '" +   query  + "') LIMIT 0, 20;"
 
         self.cursor.execute(sql)
         res = self.cursor.fetchall()

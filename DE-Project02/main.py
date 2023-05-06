@@ -12,13 +12,14 @@ DBobejct = DbOps(databaseName, tablename)
 DBobejct.connect()
 
 # Input Keyword to Google Search Engine
-keyword = input("Enter the search keyword : ")
-searchEngine = input("Enter the search Engine : \n"
-                     "1. Google\n"
-                     "2. Bing\n"
-                     "3. Yahoo\n"
-                     "4. DuckDuckGo")
-
+# keyword = input("Enter the search keyword : ")
+keyword = 'data analyst'
+# searchEngine = input("Enter the search Engine : \n"
+#                      "1. Google\n"
+#                      "2. Bing\n"
+#                      "3. Yahoo\n"
+#                      "4. DuckDuckGo")
+searchEngine = 'Yahoo'
 # query = "iphone 13"
 # searchEngine = "Google"
 
@@ -38,13 +39,14 @@ else:
 # googleSearch(query, searchEngine)
 Search(keyword, searchEngine)
 
-query = input("Enter the search query : ")
+# query = input("Enter the search query : ")
 
-res= DBobejct.searchKeyword(query)
+# res= DBobejct.searchKeyword(query)
+# print(res)
 
-print(res)
 # res= Search("iphone 14 pro", "duckduckgo")
 #
 # print(res)
+
 
 
