@@ -26,3 +26,23 @@ correctSpell =spellChecker('New yor  City')
 if correctSpell != None:
     print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
     print(correctSpell['query'] , correctSpell['correctText'] )
+
+
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+nltk.download('stopwords')
+
+def preprocess(text):
+    # Tokenize the input
+    words = nltk.word_tokenize(text)
+    
+    # Remove stop words
+    stop_words = set(stopwords.words('english'))
+    filtered_words = [word for word in words if word.casefold() not in stop_words]
+    
+    # Stem the remaining words
+    stemmer = PorterStemmer()
+    stemmed_words = [stemmer.stem(word) for word in filtered_words]
+    
+    return stemmed_words

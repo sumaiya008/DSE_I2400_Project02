@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import request, jsonify
-from utils.utils import spellChecker
+from utils.utils import spellChecker, preprocess
 from googleSearch import DBobejct
+
 
 # import pandas as pd
 
@@ -12,7 +13,8 @@ def index():
     try:
         if request.values['keyword']:
             keyword= request.values['keyword']
-
+            keyword = preprocess(keyword) #edited here
+            
             correctSpell =spellChecker('New yor  City')
             print(correctSpell)
             if correctSpell != None:
@@ -33,7 +35,6 @@ def index():
     except Exception as ex:
         return jsonify(
             {"message": "Page Not Found", "status": "fail"}), 404
-
 
 
 if __name__ == '__main__':
