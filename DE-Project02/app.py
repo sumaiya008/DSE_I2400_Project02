@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request, jsonify
 from utils.utils import spellChecker
 from googleSearch import DBobejct
+from preprocess import preprocess
 
 # import pandas as pd
 
@@ -34,7 +35,14 @@ def index():
         return jsonify(
             {"message": "Page Not Found", "status": "fail"}), 404
 
-
+@app.route('/api/search')
+def search():
+    query = request.args.get('q')
+    # Preprocess the search query
+    processed_query = preprocess(query)
+    # Search the preprocessed query in the search engine
+    results = search_engine.search(processed_query)
+    return jsonify(results)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port =5005)
