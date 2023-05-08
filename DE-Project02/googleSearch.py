@@ -9,7 +9,7 @@ import requests
 from serpapi import GoogleSearch
 
 databaseName = 'my_custom_bot'
-tablename = 'scrapedData'
+tablename = 'scrapeddata'
 
 searchEngines = {'google': 'http://google.com/search?q=',
                  '1': 'http://google.com/search?q=',

@@ -81,3 +81,12 @@ class DbOps:
         return results
 
 
+    def alterTable(self):
+
+        # sql = "INSERT INTO " + self.tableName + " ( Keyword, SearchEngine, URLs, Title, Data) VALUES (%s,%s,%s, %s, %s)"
+        # sql = "SELECT * FROM " + self.tableName + " WHERE MATCH ( Keyword ) AGAINST ( '" +   query  + "') LIMIT 0, 20;"
+
+        # ALTER TABLE scrapeddata ADD FULLTEXT(Keyword);
+        sql ="ALTER TABLE "+ self.tableName + " ADD FULLTEXT (Keyword)"
+        self.cursor.execute(sql)
+        print(" Set FULLTEXT Successfully.......")

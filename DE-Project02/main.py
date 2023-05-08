@@ -13,7 +13,7 @@ DBobejct.connect()
 
 # Input Keyword to Google Search Engine
 # keyword = input("Enter the search keyword : ")
-keyword = 'data analyst'
+keyword = 'Shubham Khandale'
 # searchEngine = input("Enter the search Engine : \n"
 #                      "1. Google\n"
 #                      "2. Bing\n"
@@ -41,11 +41,11 @@ Search(keyword, searchEngine)
 
 # query = input("Enter the search query : ")
 
-# res= DBobejct.searchKeyword(query)
-# print(res)
+res= DBobejct.searchKeyword(keyword)
+print(res)
 
 # res= Search("iphone 14 pro", "duckduckgo")
-#
+# #
 # print(res)
 
 

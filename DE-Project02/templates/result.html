@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Google Search Engine Clone</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google logo">
+            </div>
+            <form>
+                <input type="text" placeholder="Search Google" name="user_input">
+<!--                <button>Google Search</button>-->
+<!--                <a href= "/view">Google Search</a>-->
+                <button type="submit" formaction="/view">Google Search</button>
+                <button>I'm Feeling Lucky</button>
+            </form>
+        </div>
+    </header>
+    <main>
+        <div class="search-results">
+<!--            <h2>Search Results</h2>-->
+            <ul id="search-results-list">
+
+            <ul>
+        {% for item in content %}
+            <b>{{ item[3] }}</b><br>
+<!--        <i>- {{ item[3] }}</i>-->
+            <a href=" {{ item[2] }} ">{{ item[2] }}</a><br>
+            <i>{{ item[4] }}</i><br><br>
+
+        {% endfor %}
+    </ul>
+
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <ul>
+            <a href="#">Advertising</a> &nbsp
+            <a href="#">Business</a> &nbsp
+            <a href="#">About</a>
+        </ul>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -13,9 +13,11 @@ def index():
     try:
         if request.values['keyword']:
             keyword= request.values['keyword']
+
             keyword = preprocess(keyword) #edited here
             
             correctSpell =spellChecker('New yor  City')
+
             print(correctSpell)
             if correctSpell != None:
                 print("Spelling ")
