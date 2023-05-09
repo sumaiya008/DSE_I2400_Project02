@@ -72,7 +72,7 @@ class DbOps:
     def searchKeyword(self, query):
 
         # sql = "INSERT INTO " + self.tableName + " ( Keyword, SearchEngine, URLs, Title, Data) VALUES (%s,%s,%s, %s, %s)"
-        sql = "SELECT * FROM " + self.tableName + " WHERE MATCH ( Keyword ) AGAINST ( '" +   query  + "') LIMIT 0, 20;"
+        sql = "SELECT * FROM " + self.tableName + " WHERE MATCH ( Keyword ) AGAINST ( '" +   query  + "') LIMIT 0, 30;"
 
         self.cursor.execute(sql)
         res = self.cursor.fetchall()

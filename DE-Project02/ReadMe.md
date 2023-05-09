@@ -34,7 +34,7 @@ $ mysql -u root -p
 
 
 ```sh
-$ python main.py
+$ python frontEnd.py
 ```
 
 

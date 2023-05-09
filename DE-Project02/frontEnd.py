@@ -41,6 +41,7 @@ def before_first_request(alterTable=None):
 @app.route('/')
 def index():
     if (request.method == 'GET') or (request.method == 'POST'):
+
         return render_template('index.html')
 
 
