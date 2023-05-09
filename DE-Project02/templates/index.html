@@ -1,40 +1,29 @@
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <head>
     <meta charset="utf-8">
     <title>Google Search Engine Clone</title>
 </head>
 <body>
     <header>
+        <a class = 'headerlink' href="#">Images<i class="fa fa-camera" style="font-size: 0.75em;"></i></a> &nbsp
+        <a class = 'headerlink' href="#">Email<i class="fa fa-envelope"></i></a> &nbsp
+    </header>
+    <main>
+        <div class="bg"></div>
         <div class="container">
             <div class="logo">
-                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google logo">
+                <img src="logo1.png" class="resize">
             </div>
             <form>
                 <input type="text" placeholder="Search Google" name="user_input">
-<!--                <button>Google Search</button>-->
-<!--                <a href= "/view">Google Search</a>-->
-                <button type="submit" formaction="/view">Google Search</button>
-                <button>I'm Feeling Lucky</button>
+                <button type="submit" formaction="/view">Search</button>
+
             </form>
         </div>
-    </header>
-    <main>
-        <div class="search-results">
-<!--            <h2>Search Results</h2>-->
-            <ul id="search-results-list">
-<!--            <p> {{data1}}</p>-->
 
-<!--                <ul>-->
-<!--        {% for item in content %}-->
-<!--            <b>{{ item[0] }}</b>  <i>- {{ item[3] }}</i>-->
-<!--            <a href=" {{ item[2] }} ">{{ item[2] }}</a>-->
-<!--            <li>{{ item[5] }}</li>-->
-<!--        {% endfor %}-->
-<!--    </ul>-->
-
-            </ul>
-        </div>
     </main>
     <footer>
         <ul>
