@@ -63,7 +63,7 @@ class DbOps:
         self.cnx.commit()
 
         if self.cursor.rowcount >= 1:
-            print(f"{self.cursor.rowcount} record inserted \n")
+            # print(f"{self.cursor.rowcount} record inserted \n")
             return True
         else:
             print("record not inserted")
@@ -76,7 +76,7 @@ class DbOps:
 
         self.cursor.execute(sql)
         res = self.cursor.fetchall()
-        print("Query Executed")
+        # print("Query Executed")
         results = [list(i) for i in res]
         return results
 
@@ -89,4 +89,4 @@ class DbOps:
         # ALTER TABLE scrapeddata ADD FULLTEXT(Keyword);
         sql ="ALTER TABLE "+ self.tableName + " ADD FULLTEXT(Keyword)"
         self.cursor.execute(sql)
-        print(" Set FULLTEXT Successfully.......")
+        print("Set FULLTEXT Successfully")

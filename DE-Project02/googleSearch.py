@@ -42,7 +42,7 @@ def Search(keyword, searchengine):
         results = []
 
         # iterating over tags
-        for i in tags:
+        for i in tqdm(tags):
             try:
                 # selecting url using href tags
                 url = (i.select_one('a[href]')).get('href', u'')
@@ -60,7 +60,7 @@ def Search(keyword, searchengine):
                                 'title': title,
                                 'text': text})
             except:
-                print("Error in fetching data")
+                # print("Error in fetching data")
                 continue
 
             DBobejct.insertQuery(keyword, searchengine, url, title, text)
@@ -82,7 +82,7 @@ def Search(keyword, searchengine):
         # creating an empty list to store the results
         results = []
 
-        for i in tags:
+        for i in tqdm(tags):
             try:
                 # selecting url using href tags
                 link = (i.select_one('div.compTitle h3.title a')).get('href', u'')
@@ -107,7 +107,7 @@ def Search(keyword, searchengine):
                                 'title': title,
                                 'text': text})
             except:
-                print("Error in fetching data")
+                # print("Error in fetching data")
                 continue
 
             DBobejct.insertQuery(keyword, searchengine, link, title, text)
@@ -130,7 +130,7 @@ def Search(keyword, searchengine):
 
         results = []
 
-        for i in organic_results:
+        for i in tqdm(organic_results):
             try:
                 results.append({'query': keyword,
                                 'link': i["link"],
@@ -138,7 +138,7 @@ def Search(keyword, searchengine):
                                 'text': i["snippet"]
                                 })
             except:
-                print("Error in fetching data")
+                # print("Error in fetching data")
                 continue
             DBobejct.insertQuery(keyword, searchengine, i["link"],i["title"], i["snippet"])
         return results
@@ -159,7 +159,7 @@ def Search(keyword, searchengine):
         results = []
 
 
-        for i in tags:
+        for i in tqdm(tags):
 
             try:
                 # selecting url using href tags
@@ -174,7 +174,7 @@ def Search(keyword, searchengine):
                                 'title': title,
                                 'text': text})
             except:
-                print("Error in fetching data")
+                # print("Error in fetching data")
                 continue
 
             DBobejct.insertQuery(keyword, searchengine, link ,title, text)
@@ -183,66 +183,3 @@ def Search(keyword, searchengine):
         # returing list of dictionaries
         return results
 
-
-# res= Search("iphone 14 pro", "duckduckgo")
-
-# print(res)
-
-    # allTitles = []
-    #
-    # try:
-    #     urls = list(set(search(searchEngines.get(str(searchengine.lower()), None) + keyword)))
-    #     print(urls)
-    #
-    #     if not urls == None:
-    #         for i in tqdm(range(len(urls))):
-    #             try:
-    #
-    #                 # Make a request to the webpage
-    #                 # response = requests.get(urls[i])
-    #                 response = urllib.request.urlopen(urls[i])
-    #
-    #                 # Parse the HTML content using Beautiful Soup
-    #                 soup = BeautifulSoup(response.read(), 'html.parser')
-    #
-    #             except:
-    #                 print("Authorization Failed \n")
-    #
-    #             # Find the data you want using Beautiful Soup methods
-    #             try:
-    #                 title = soup.title.text.strip()
-    #                 try:
-    #                     heading = soup.h1.text.strip()
-    #                 except:
-    #                     heading = 'Null'
-    #
-    #                 paragraphs = " "
-    #                 for p in soup.find_all([ 'h2', 'p']):
-    #                     paragraphs += re.sub('\W+', ' ', p.text.strip())
-    #                     paragraphs += " "
-    #                     # paragraphs = [p.text.strip() for p in soup.find_all('p')]
-    #
-    #                 # Print the data
-    #                 print('Title:', title)
-    #                 print('Heading:', heading)
-    #                 # print("*" * 100)
-    #                 print('Paragraphs:', paragraphs[:1000])
-    #                 print("\n")
-    #
-    #                 # Checking if the data contains any ads sponsored
-    #                 pattern = r'\b(ad|ads|advertisement|sponsor(ed)?)\b'
-    #                 if re.search(pattern, paragraphs[:1000]):
-    #                     print("The string contains ads or advertising data.")
-    #                     break
-    #
-    #                 if title not in allTitles:
-    #                     allTitles.append(title)
-    #                     DBobejct.insertQuery(searchengine,keyword, urls[i], title, heading, paragraphs[:1000])
-    #
-    #                 else:
-    #                     print("already title exists")
-    #             except:
-    #                 print("An exception occurred")
-    #
-    # except:
-    #     print("Enter Correct Name")
