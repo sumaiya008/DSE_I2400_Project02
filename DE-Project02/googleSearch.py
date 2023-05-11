@@ -122,20 +122,25 @@ def Search(keyword, searchengine):
             "engine": "google",
             "num": "100",
             "q": keyword,
-            "api_key": os.environ["SERP_API_KEY"]
+            "api_key": "c7fc3a691ec233fda0bd30f70292f6b010e345be21fea15e3c5e6b759e255512"
         }
         search = GoogleSearch(params)
         results = search.get_dict()
         organic_results = results["organic_results"]
 
         results = []
-        for i in organic_results:
-            results.append({'query': keyword,
-                            'link': i["link"],
-                            'title': i["title"],
-                            'text': i["snippet"]
-                            })
 
+        for i in organic_results:
+            try:
+                results.append({'query': keyword,
+                                'link': i["link"],
+                                'title': i["title"],
+                                'text': i["snippet"]
+                                })
+            except:
+                print("Error in fetching data")
+                continue
+            DBobejct.insertQuery(keyword, searchengine, i["link"],i["title"], i["snippet"])
         return results
 
 

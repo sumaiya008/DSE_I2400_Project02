@@ -1,0 +1,30 @@
+footer{
+    text-align: center;
+}
+
+
+.resize {
+    padding-left: 25px;
+    width: 200px;
+    height: auto;
+}
+
+button{
+    color: #916ab9;
+    background-color: white;
+    border-color: white;
+    border-radius: 10px;
+    padding: 5px;
+    font-family: "Gill Sans", sans-serif;
+    font-size: 1em;
+}
+
+
+
+input {
+    padding-left: 25px;
+    border-color: white;
+    padding: 5px;
+    width: 200px;
+    border-radius: 10px;
+}

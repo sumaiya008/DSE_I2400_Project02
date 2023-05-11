@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="./static/result_style.css">
+<head>
+    <meta charset="utf-8">
+    <title>Google Search Engine Clone</title>
+</head>
+<body>
+    <header>
+        <div class="container1">
+            <div class="logo">
+                <img src="./templates/logo.png" class="resize">
+            </div>
+            <form>
+                <input type="text" placeholder="Search Google" name="user_input">
+                <button type="submit" formaction="/view">Search</button>
+            </form>
+        </div>
+    </header>
+    <main>
+        <div class="search-results">
+<!--            <h2>Search Results</h2>-->
+            <ul id="search-results-list">
+
+            <ul>
+        {% for item in content %}
+            <b>{{ item[3] }}</b><br>
+<!--        <i>- {{ item[3] }}</i>-->
+            <a href=" {{ item[2] }} ">{{ item[2] }}</a><br>
+            <i>{{ item[4] }}</i><br><br>
+
+        {% endfor %}
+    </ul>
+
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <ul>
+            <a href="#">Advertising</a> &nbsp
+            <a href="#">Business</a> &nbsp
+            <a href="#">About</a>
+        </ul>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!--    <link rel="stylesheet" href="./templates/style_.css">-->
+    <link rel="stylesheet"  href='static/style.css' >
+
+    <link rel="stylesheet " href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <head>
     <meta charset="utf-8">
-    <title>Google Search Engine Clone</title>
+    <title>Searchify</title>
 </head>
 <body>
     <header>
-        <a class = 'headerlink' href="#">Images<i class="fa fa-camera" style="font-size: 0.75em;"></i></a> &nbsp
-        <a class = 'headerlink' href="#">Email<i class="fa fa-envelope"></i></a> &nbsp
+        <a class = 'headerlink' href="/">Images<i class="fa fa-camera" style="font-size: 0.75em;"></i></a> &nbsp
+        <a class = 'headerlink' href="/">Email<i class="fa fa-envelope"></i></a> &nbsp
     </header>
     <main>
         <div class="bg"></div>
         <div class="container">
             <div class="logo">
-                <img src="logo1.png" class="resize">
+<!--                <img src="logo1.png" class="resize">-->
+                 <img src="/static/images/logo1.png",alt='logo',  style="width: 350px; border-radius: 50px; height: 100px" >
+<!--                <img src="download.png" class="resize">-->
             </div>
+            <br>
             <form>
-                <input type="text" placeholder="Search Google" name="user_input">
+                <input type="text" placeholder="Search Google" name="user_input">  &nbsp
                 <button type="submit" formaction="/view">Search</button>
 
             </form>
@@ -27,9 +32,9 @@
     </main>
     <footer>
         <ul>
-            <a href="#">Advertising</a> &nbsp
-            <a href="#">Business</a> &nbsp
-            <a href="#">About</a>
+            <a href="/">Advertising</a> &nbsp
+            <a href="/">Business</a> &nbsp
+            <a href="/">About</a>
         </ul>
     </footer>
 

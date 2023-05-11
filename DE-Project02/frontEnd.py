@@ -35,13 +35,12 @@ def before_first_request(alterTable=None):
     else:
         DBobejct.createTable()
 
-    DBobejct.alterTable()
+    # DBobejct.alterTable()
 
 
 @app.route('/')
 def index():
     if (request.method == 'GET') or (request.method == 'POST'):
-
         return render_template('index.html')
 
 
@@ -60,16 +59,14 @@ def view():
         correctSpell = spellChecker(keyword)
         # print(correctSpell)
 
-
         if correctSpell != None:
-            print("Corrected Spelling ",correctSpell )
+            print("Corrected Spelling ", correctSpell)
             res = DBobejct.searchKeyword(correctSpell)
         else:
             res = DBobejct.searchKeyword(keyword)
 
         sorted_data = word_freq(userInput, res)
-        print(sorted_data)
-
+        # print(sorted_data)
 
         return render_template('result.html', content=sorted_data)
 

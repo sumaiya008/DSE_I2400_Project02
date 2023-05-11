@@ -1,7 +1,7 @@
 .container {
     text-align: center;
     padding: 50px;
-    padding-top: 200px;
+    padding-top: 320px;
 }
 
 
@@ -26,21 +26,22 @@ button{
     color: #916ab9;
     background-color: white;
     border-color: white;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 8px;
     font-family: "Gill Sans", sans-serif;
     font-size: 1em;
+    width: 90px;
 }
 
 input {
     border-color: white;
     padding: 10px;
-    width: 400px;
-    border-radius: 10px;
+    width: 500px;
+    border-radius: 20px;
 }
 
 html { 
-    background: url(image1.jpeg) no-repeat center center fixed; 
+    background: url(image1.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

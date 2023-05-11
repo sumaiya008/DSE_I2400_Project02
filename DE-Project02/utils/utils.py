@@ -14,8 +14,11 @@ def spellChecker(query):
     for i in range(len(result['corrections'])):
         # print(result['corrections'][i]['start'])
         if result['corrections'][i]['start'] > 0:
-            return {'query': query, 'correctText': correctText}
+            return correctText
 
+
+
+# a= spellChecker('wate')
 
 # import nltk
 # from nltk.corpus import stopwords

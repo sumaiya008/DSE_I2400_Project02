@@ -87,6 +87,6 @@ class DbOps:
         # sql = "SELECT * FROM " + self.tableName + " WHERE MATCH ( Keyword ) AGAINST ( '" +   query  + "') LIMIT 0, 20;"
 
         # ALTER TABLE scrapeddata ADD FULLTEXT(Keyword);
-        sql ="ALTER TABLE "+ self.tableName + " ADD FULLTEXT (Keyword)"
+        sql ="ALTER TABLE "+ self.tableName + " ADD FULLTEXT(Keyword)"
         self.cursor.execute(sql)
         print(" Set FULLTEXT Successfully.......")
