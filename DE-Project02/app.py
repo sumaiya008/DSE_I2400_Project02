@@ -1,43 +1,75 @@
+
+from flask import render_template
 from flask import Flask
-from flask import request, jsonify
-from utils.utils import spellChecker, preprocess
-from googleSearch import DBobejct
+from flask import request
+from utils.utils import spellChecker, word_freq
+from utils.googleSearch import DBobejct, Search
+from utils.DbOps import DbOps
+from flask_ngrok import run_with_ngrok
 
+import logging, ngrok
 
-# import pandas as pd
+logging.basicConfig(level=logging.INFO)
+tunnel = ngrok.werkzeug_develop()
 
 app = Flask(__name__)
+run_with_ngrok(app)
 
-@app.route('/index', methods=['GET','POST'])
+databaseName = 'my_custom_bot'
+tablename = 'scrapeddata'
+
+
+@app.before_first_request
+def before_first_request(alterTable=None):
+
+    # Calling database object
+    DBobejct = DbOps(databaseName, tablename)
+    # connecting to database
+    DBobejct.connect()
+    # Check if database exists
+    if DBobejct.database_exists():
+        print("Database exists........")
+    else:
+        print("Error while connecting to database")
+
+    # Check if Table Exists if not the it will create the table
+    if DBobejct.checkTable():
+        pass
+    else:
+        DBobejct.createTable()
+
+    DBobejct.alterTable()
+
+
+@app.route('/')
 def index():
-    try:
-        if request.values['keyword']:
-            keyword= request.values['keyword']
+    if (request.method == 'GET') or (request.method == 'POST'):
+        return render_template('index.html')
 
-            keyword = preprocess(keyword) #edited here
-            
-            correctSpell =spellChecker('New yor  City')
 
-            print(correctSpell)
-            if correctSpell != None:
-                print("Spelling ")
-                res = DBobejct.searchKeyword(correctSpell)
-            else:
-                res = DBobejct.searchKeyword(keyword)
+@app.route('/view')
+def view():
+    if (request.method == 'GET') or (request.method == 'POST'):
+        userInput = request.args.get('user_input')
 
-            print(res)
-            return jsonify(
-                {"message": res ,
-                 "status": "success"}), 200
+        if userInput == '':
+            return render_template('pageNotFound.html')
 
+        for engine in ['Bing', 'Yahoo', 'DuckDuckGo', 'Google']:
+            Search(userInput, engine)
+
+        keyword = userInput
+        correctSpell = spellChecker(keyword)
+
+        if correctSpell != None:
+            res = DBobejct.searchKeyword(correctSpell)
         else:
-            pass
+            res = DBobejct.searchKeyword(keyword)
 
+        sorted_data = word_freq(userInput, res)
 
-    except Exception as ex:
-        return jsonify(
-            {"message": "Page Not Found", "status": "fail"}), 404
+        return render_template('result.html', content=sorted_data)
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port =5005)
+    app.run()

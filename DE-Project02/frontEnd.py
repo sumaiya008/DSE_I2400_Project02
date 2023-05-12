@@ -2,14 +2,13 @@ from flask import render_template
 from flask import Flask
 from flask import request
 from utils.utils import spellChecker, word_freq
-from googleSearch import DBobejct, Search
-from DbOps import DbOps
+from utils.googleSearch import DBobejct, Search
+from utils.DbOps import DbOps
 
 app = Flask(__name__)
 
 databaseName = 'my_custom_bot'
 tablename = 'scrapeddata'
-
 
 
 @app.before_first_request
@@ -30,7 +29,7 @@ def before_first_request(alterTable=None):
     else:
         DBobejct.createTable()
 
-    # DBobejct.alterTable()
+    DBobejct.alterTable()
 
 
 @app.route('/')
@@ -41,30 +40,26 @@ def index():
 
 @app.route('/view')
 def view():
-    # print(keyword)
     if (request.method == 'GET') or (request.method == 'POST'):
         userInput = request.args.get('user_input')
 
-        if userInput =='':
+        if userInput == '':
             return render_template('pageNotFound.html')
-        # print(userInput)
 
         for engine in ['Bing', 'Yahoo', 'DuckDuckGo']:
             Search(userInput, engine)
 
-
         keyword = userInput
         correctSpell = spellChecker(keyword)
-        # print(correctSpell)
 
         if correctSpell != None:
-            # print("Corrected Spelling ", correctSpell)
             res = DBobejct.searchKeyword(correctSpell)
         else:
             res = DBobejct.searchKeyword(keyword)
 
+        #calling frequency counter
         sorted_data = word_freq(userInput, res)
-        # print(sorted_data)
+
 
         return render_template('result.html', content=sorted_data)
 
